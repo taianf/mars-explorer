@@ -2,6 +2,7 @@ package br.com.taian.marsexplorer.api.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -32,4 +33,13 @@ public class Mission {
                 ", probes=" + probes +
                 '}';
     }
+
+    public List<Position> getMissionResult() {
+        List<Position> missionResult = new ArrayList<>();
+        for (Probe probe : getProbes()) {
+            missionResult.add(probe.getEndPosition(board));
+        }
+        return missionResult;
+    }
+
 }

@@ -30,4 +30,27 @@ public class Probe {
                 ", moves='" + moves + '\'' +
                 '}';
     }
+
+    public Position getEndPosition(Board board) {
+        char[] movements = getMoves().toCharArray();
+        Position currentPosition = getStart();
+        for (char movement : movements) {
+            currentPosition = moveProbe(currentPosition, movement, board);
+        }
+        return currentPosition;
+    }
+
+    private Position moveProbe(Position position, char move, Board board) {
+        switch (move) {
+            case 'M':
+                return position.move(board);
+            case 'L':
+                return position.turnLeft();
+            case 'R':
+                return position.turnRight();
+            default:
+                return position;
+        }
+    }
+
 }
