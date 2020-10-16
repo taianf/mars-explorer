@@ -1,0 +1,1 @@
+{"board":{"x":5,"y":5},"probes":[{"start":{"x":1,"y":2,"direction":"N"},"moves":"LMLMLMLMM"},{"start":{"x":3,"y":3,"direction":"E"},"moves":"MMRMMRMRRM"}]}::[{"x":1,"y":3,"direction":"N"},{"x":5,"y":1,"direction":"E"}]
