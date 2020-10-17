@@ -18,9 +18,7 @@ public class Controller {
 
     @PostMapping("/mission")
     public ResponseEntity<List<Position>> mission(@RequestBody Mission mission) {
-
         List<Position> missionResult = mission.getMissionResult();
-
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(missionResult);

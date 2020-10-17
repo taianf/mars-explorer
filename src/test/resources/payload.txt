@@ -1,1 +1,3 @@
 {"board":{"x":5,"y":5},"probes":[{"start":{"x":1,"y":2,"direction":"N"},"moves":"LMLMLMLMM"},{"start":{"x":3,"y":3,"direction":"E"},"moves":"MMRMMRMRRM"}]}::[{"x":1,"y":3,"direction":"N"},{"x":5,"y":1,"direction":"E"}]
+{"board":{"x":5,"y":5},"probes":[{"start":{"x":1,"y":2,"direction":"N"},"moves":"MMMMM"},{"start":{"x":1,"y":5,"direction":"S"},"moves":"MMMMM"}]}::[{"x":1,"y":3,"direction":"N"},{"x":1,"y":4,"direction":"S"}]
+{"board":{"x":5,"y":5},"probes":[{"start":{"x":0,"y":0,"direction":"E"},"moves":"RMMRMMRMM"},{"start":{"x":5,"y":5,"direction":"S"},"moves":"LMMLMMLMM"}]}::[{"x":0,"y":2,"direction":"N"},{"x":3,"y":5,"direction":"W"}]

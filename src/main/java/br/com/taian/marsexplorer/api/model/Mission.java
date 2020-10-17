@@ -2,28 +2,16 @@ package br.com.taian.marsexplorer.api.model;
 
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class Mission {
     private Board board;
     private List<Probe> probes;
 
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     public List<Probe> getProbes() {
         return probes;
-    }
-
-    public void setProbes(List<Probe> probes) {
-        this.probes = probes;
     }
 
     @Override
@@ -35,11 +23,14 @@ public class Mission {
     }
 
     public List<Position> getMissionResult() {
-        List<Position> missionResult = new ArrayList<>();
-        for (Probe probe : getProbes()) {
-            missionResult.add(probe.getEndPosition(board));
+        board.setProbePositions(getProbes().stream().map(Probe::getStart).collect(Collectors.toList()));
+        int maxLength = getProbes().stream().map(probe -> probe.getMoves().length()).mapToInt(value -> value).max().orElse(0);
+        for (int movementNumber = 0; movementNumber < maxLength; movementNumber++) {
+            for (Probe probe : getProbes()) {
+                probe.getNextPosition(board, movementNumber);
+            }
         }
-        return missionResult;
+        return getProbes().stream().map(Probe::getPositionTracker).collect(Collectors.toList());
     }
 
 }

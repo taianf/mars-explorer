@@ -2,34 +2,30 @@ package br.com.taian.marsexplorer.api.model;
 
 import lombok.Data;
 
+import java.util.Objects;
+
 @Data
 public class Position {
-    private int x;
-    private int y;
-    private String direction;
+    private final int x;
+    private final int y;
+    private final String direction;
+
+    public Position(int x, int y, String direction) {
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+    }
 
     public int getX() {
         return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public String getDirection() {
         return direction;
-    }
-
-    public void setDirection(String direction) {
-        this.direction = direction;
     }
 
     @Override
@@ -44,89 +40,90 @@ public class Position {
     public Position move(Board board) {
         switch (getDirection()) {
             case "N":
-                moveNorth(board);
-                break;
+                return moveNorth(board);
             case "S":
-                moveSouth();
-                break;
+                return moveSouth();
             case "E":
-                moveEast(board);
-                break;
+                return moveEast(board);
             case "W":
-                moveWest();
-                break;
+                return moveWest();
             default:
-                break;
+                return this;
+        }
+    }
+
+    private Position moveWest() {
+        int newX = getX() - 1;
+        if (newX >= 0) {
+            return new Position(newX, getY(), getDirection());
         }
         return this;
     }
 
-    private void moveWest() {
-        int newX = getX() - 1;
-        if (newX >= 0) {
-            setX(newX);
-        }
-    }
-
-    private void moveEast(Board board) {
+    private Position moveEast(Board board) {
         int newX = getX() + 1;
         if (newX <= board.getX()) {
-            setX(newX);
+            return new Position(newX, getY(), getDirection());
         }
+        return this;
     }
 
-    private void moveSouth() {
+    private Position moveSouth() {
         int newY = getY() - 1;
         if (newY >= 0) {
-            setY(newY);
+            return new Position(getX(), newY, getDirection());
         }
+        return this;
     }
 
-    private void moveNorth(Board board) {
+    private Position moveNorth(Board board) {
         int newY = getY() + 1;
         if (newY <= board.getY()) {
-            setY(newY);
+            return new Position(getX(), newY, getDirection());
         }
+        return this;
     }
-
 
     public Position turnLeft() {
         switch (getDirection()) {
             case "N":
-                setDirection("W");
-                break;
+                return new Position(getX(), getY(), "W");
             case "S":
-                setDirection("E");
-                break;
+                return new Position(getX(), getY(), "E");
             case "E":
-                setDirection("N");
-                break;
+                return new Position(getX(), getY(), "N");
             case "W":
-                setDirection("S");
-                break;
+                return new Position(getX(), getY(), "S");
             default:
-                break;
+                return this;
         }
-        return this;
     }
 
     public Position turnRight() {
         switch (getDirection()) {
             case "N":
-                setDirection("E");
-                break;
+                return new Position(getX(), getY(), "E");
             case "S":
-                setDirection("W");
-                break;
+                return new Position(getX(), getY(), "W");
             case "E":
-                setDirection("S");
-                break;
+                return new Position(getX(), getY(), "S");
             case "W":
-                setDirection("N");
-                break;
+                return new Position(getX(), getY(), "N");
             default:
-                break;
+                return this;
         }
-        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, direction);
     }
 }

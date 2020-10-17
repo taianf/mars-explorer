@@ -38,7 +38,7 @@ class ApiApplicationTests {
 
     @ParameterizedTest
     @ArgumentsSource(TestCasesProvider.class)
-    void firstTest(Pair<String, String> testPayload) {
+    void missionTest(Pair<String, String> testPayload) {
         HttpEntity<String> request = new HttpEntity<>(testPayload.getValue0(), httpHeaders);
         ResponseEntity<String> entity = restTemplate.postForEntity("/api/mission", request, String.class);
         Assertions.assertEquals(HttpStatus.OK, entity.getStatusCode());
@@ -47,6 +47,7 @@ class ApiApplicationTests {
 
 }
 
+@SuppressWarnings("ConstantConditions")
 class TestCasesProvider implements ArgumentsProvider {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
