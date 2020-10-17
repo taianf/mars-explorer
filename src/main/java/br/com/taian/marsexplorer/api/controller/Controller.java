@@ -2,6 +2,7 @@ package br.com.taian.marsexplorer.api.controller;
 
 import br.com.taian.marsexplorer.api.model.Mission;
 import br.com.taian.marsexplorer.api.model.Position;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,8 @@ import java.util.List;
 @RequestMapping("api")
 public class Controller {
 
-    @PostMapping("/mission")
+    @ApiOperation(value = "Receives a mission and returns the final position of the probes")
+    @PostMapping(value = "/mission", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Position>> mission(@RequestBody Mission mission) {
         List<Position> missionResult = mission.getMissionResult();
         return ResponseEntity.status(HttpStatus.OK)
